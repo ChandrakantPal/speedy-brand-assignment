@@ -1,0 +1,172 @@
+[
+  {
+    "topic": "The Importance of Target Audience Segmentation",
+    "keywords": [
+      "Target audience",
+      "Segmentation",
+      "Marketing strategy",
+      "Customer profiling"
+    ],
+    "id": "d1939e56-70e5-49ab-a239-4e8a242133ae",
+    "category": "Custom"
+  },
+  {
+    "topic": "Creating Compelling Calls-to-Action",
+    "keywords": [
+      "Calls-to-action",
+      "Conversion rate",
+      "Engagement",
+      "Click-through"
+    ],
+    "id": "e4bc4c1d-d9a4-4a3e-948b-ef63af18a5f2",
+    "category": "Custom"
+  },
+  {
+    "topic": "Effective Email Marketing Campaigns",
+    "keywords": [
+      "Email marketing",
+      "Campaigns",
+      "Open rate",
+      "Click-through rate"
+    ],
+    "id": "f27d71b1-7aa9-44e4-a96b-29b5645a1a2d",
+    "category": "Custom"
+  },
+  {
+    "topic": "Building an Effective Sales Funnel",
+    "keywords": [
+      "Sales funnel",
+      "Lead generation",
+      "Conversion",
+      "Customer acquisition"
+    ],
+    "id": "e29a4e3c-4c3f-46f2-8807-d4eaf9a8d99a",
+    "category": "Custom"
+  },
+  {
+    "topic": "Crafting Persuasive Product Descriptions",
+    "keywords": [
+      "Product descriptions",
+      "Copywriting",
+      "Unique selling points",
+      "Features"
+    ],
+    "id": "e93c9f4e-0c0c-4e1e-84e4-1d69f5df6a47",
+    "category": "Custom"
+  },
+  {
+    "topic": "Strategies for Social Media Advertising",
+    "keywords": ["Social media", "Advertising", "Targeting", "Engagement"],
+    "id": "b74ee51f-b527-4b7f-8e7c-79fcfed46c8d",
+    "category": "Custom"
+  },
+  {
+    "topic": "Optimizing Landing Page Conversion Rates",
+    "keywords": [
+      "Landing page",
+      "Conversion rates",
+      "A/B testing",
+      "User experience"
+    ],
+    "id": "b04e18a9-3a17-468c-8b7f-61e00b3b2eb0",
+    "category": "ICP"
+  },
+  {
+    "topic": "Effective Lead Generation Techniques",
+    "keywords": [
+      "Lead generation",
+      "Prospecting",
+      "Lead nurturing",
+      "Lead qualification"
+    ],
+    "id": "a66f4895-cdfe-4d3e-8197-ecfbdd2b6d35",
+    "category": "ICP"
+  },
+  {
+    "topic": "The Art of Persuasive Copywriting",
+    "keywords": [
+      "Copywriting",
+      "Techniques",
+      "Emotional appeal",
+      "Call to action"
+    ],
+    "id": "d61cf4a6-c6db-4d1a-9a3d-7864a9f9e05d",
+    "category": "ICP"
+  },
+  {
+    "topic": "Building Customer Loyalty Programs",
+    "keywords": [
+      "Customer loyalty",
+      "Retention",
+      "Rewards program",
+      "Customer satisfaction"
+    ],
+    "id": "c8909e72-5d78-4b92-848d-9a2b274f563c",
+    "category": "ICP"
+  },
+  {
+    "topic": "Crafting Effective Sales Pitches",
+    "keywords": [
+      "Sales pitches",
+      "Pitching techniques",
+      "Value proposition",
+      "Objection handling"
+    ],
+    "id": "f879a3f9-8e9e-4e2b-a1fc-b6e65c6f54a0",
+    "category": "ICP"
+  },
+  {
+    "topic": "The Power of Influencer Marketing",
+    "keywords": [
+      "Influencer marketing",
+      "Brand collaborations",
+      "Social media influencers",
+      "Audience reach"
+    ],
+    "id": "e2b8e13b-859e-4781-b11e-8fe9c14cb3b1",
+    "category": "ICP"
+  },
+  {
+    "topic": "Defining a Compelling Brand Story",
+    "keywords": [
+      "Brand story",
+      "Brand identity",
+      "Brand values",
+      "Differentiation"
+    ],
+    "id": "f0c17f10-7f75-4f80-9f88-1ebe3c6d9642",
+    "category": "Mission"
+  },
+  {
+    "topic": "Developing a Customer-Centric Culture",
+    "keywords": [
+      "Customer-centric",
+      "Customer satisfaction",
+      "Feedback",
+      "Customer journey"
+    ],
+    "id": "a88e9eef-68f3-4e23-ae79-1c2c930583a7",
+    "category": "Mission"
+  },
+  {
+    "topic": "Product Positioning and Differentiation",
+    "keywords": [
+      "Product positioning",
+      "Differentiation strategy",
+      "Competitive advantage"
+    ],
+    "id": "d61f56e7-42e9-4f23-aa29-29885c8e1b55",
+    "category": "Product"
+  },
+  {
+    "topic": "Understanding Market Segmentation",
+    "keywords": [
+      "Market segmentation",
+      "Demographics",
+      "Psychographics",
+      "Targeting"
+    ],
+    "id": "ec3b4a0f-0f6c-462c-b9f5-8fb82e4e83c5",
+    "category": "Product"
+  }
+]
