@@ -84,7 +84,7 @@ export function InsertImageUploadedForm({
           setSrc("");
         }}
       >
-        Confirm
+        Add
       </button>
     </div>
   );
