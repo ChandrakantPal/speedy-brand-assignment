@@ -122,7 +122,11 @@ const Editor: React.FC<{ topic: Topic }> = ({ topic }) => {
   };
 
   if (loading) {
-    return <Loader />;
+    return (
+      <div className="flex items-center justify-center">
+        <Loader />
+      </div>
+    );
   }
 
   return (

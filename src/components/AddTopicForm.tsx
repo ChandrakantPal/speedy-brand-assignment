@@ -40,12 +40,6 @@ const AddTopicForm: React.FC<AddTopicFormProps> = ({
       return;
     }
 
-    console.log({
-      topic,
-      keywords: keywordsList,
-      category: selectedCategory,
-    });
-
     addNewTopic({
       topic,
       keywords: keywordsList,

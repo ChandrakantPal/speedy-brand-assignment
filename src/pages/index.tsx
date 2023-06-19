@@ -3,7 +3,6 @@ import { Tab } from "@headlessui/react";
 import { Inter } from "next/font/google";
 import topicsData from "../static/data.json";
 import classNames from "classnames";
-import Badge from "@/components/Badge";
 import Modal from "@/components/Modal";
 import AddTopicForm from "@/components/AddTopicForm";
 import Editor from "@/components/Editor/Editor";
@@ -11,7 +10,6 @@ import PencilIcon from "@/components/icons/PencilIcon";
 import AddIcon from "@/components/icons/AddIcon";
 import DeleteIcon from "@/components/icons/DeleteIcon";
 import TopicAndKeywords from "@/components/TopicAndKeywords";
-import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
