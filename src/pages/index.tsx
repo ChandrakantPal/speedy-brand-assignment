@@ -1,118 +1,170 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import * as React from "react";
+import { Tab } from "@headlessui/react";
+import { Inter } from "next/font/google";
+import topicsData from "../static/data.json";
+import classNames from "classnames";
+import Badge from "@/components/Badge";
+import Modal from "@/components/Modal";
+import AddTopicForm from "@/components/AddTopicForm";
+import Editor from "@/components/Editor/Editor";
+import PencilIcon from "@/components/icons/PencilIcon";
+import AddIcon from "@/components/icons/AddIcon";
+import DeleteIcon from "@/components/icons/DeleteIcon";
+import TopicAndKeywords from "@/components/TopicAndKeywords";
+import Navbar from "@/components/Navbar";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
+
+export type Categories = "Custom" | "ICP" | "Mission" | "Product" | "ALL";
+export interface Topic {
+  topic: string;
+  keywords: string[];
+  category: Omit<"ALL", Categories>;
+  id: string;
+}
+
+const categories: Categories[] = ["ALL", "Custom", "ICP", "Mission", "Product"];
 
 export default function Home() {
+  const [selectedCategory, setSelectedCategory] =
+    React.useState<Categories>("ALL");
+  const [allTopics, setAllTopics] = React.useState<Topic[]>(topicsData);
+  const [topics, setTopics] = React.useState<Topic[]>([]);
+  const [openAddTopicModal, setOpenAddTopicModal] = React.useState(false);
+  const [openEditorModal, setOpenEditorModal] = React.useState(false);
+  const [writeTopic, setWriteTopic] = React.useState<Topic | null>(null);
+
+  React.useEffect(() => {
+    if (selectedCategory === "ALL") {
+      setTopics(allTopics);
+    } else {
+      const topicsWithSelectedCategory = allTopics.filter(
+        (topic) => topic.category === selectedCategory
+      );
+      setTopics(topicsWithSelectedCategory);
+    }
+  }, [allTopics, selectedCategory]);
+
+  const addNewTopic = (topic: Topic) => {
+    setAllTopics((currentTopics) => [...currentTopics, topic]);
+  };
+
+  const removeTopic = (topic: Topic) => {
+    const currentAllTopics = [...allTopics];
+    const updatedAllTopics = currentAllTopics.filter(
+      (item) => item.id !== topic.id
+    );
+    setAllTopics(updatedAllTopics);
+  };
+
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
+      className={`flex text-sm lg:text-base min-h-screen flex-col items-center justify-between lg:px-24 px-6 py-10 mt-16 ${inter.className}`}
     >
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <div className="w-full max-w-full px-2 space-y-4 lg:max-w-3xl sm:px-0">
+        <div>
+          <button
+            type="button"
+            className="flex items-center gap-2 px-4 py-2 ml-auto text-orange-500 border border-orange-500 rounded-lg hover:text-white hover:bg-orange-500"
+            onClick={() => {
+              setOpenAddTopicModal(true);
+            }}
           >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+            Add Topic
+            <AddIcon />
+          </button>
         </div>
+        <Tab.Group>
+          <Tab.List className="flex p-1 space-x-1 rounded-xl bg-blue-900/20">
+            {categories.map((category) => (
+              <Tab
+                key={category}
+                onClick={() => {
+                  setSelectedCategory(category);
+                }}
+                className={({ selected }) =>
+                  classNames(
+                    "w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700",
+                    "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
+                    selected
+                      ? "bg-white shadow"
+                      : "text-blue-100 hover:bg-white/[0.12] hover:text-white"
+                  )
+                }
+              >
+                {category}
+              </Tab>
+            ))}
+          </Tab.List>
+          <Tab.Panels className="space-y-4">
+            <div className="p-3 bg-gray-100 rounded-lg">Recommended Topics</div>
+            {topics.map((item) => (
+              <div
+                key={item.id}
+                className={classNames(
+                  "bg-white p-3 border rounded-lg",
+                  "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
+                )}
+              >
+                <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+                  <TopicAndKeywords
+                    topic={item.topic}
+                    keywords={item.keywords}
+                  />
+                  <div className="flex items-center gap-2 ">
+                    <button
+                      type="button"
+                      className="flex items-center gap-2 px-4 py-2 border rounded-lg md:border-0 hover:bg-green-500/80 hover:text-white"
+                      onClick={() => {
+                        setWriteTopic(item);
+                        setOpenEditorModal(true);
+                      }}
+                    >
+                      <span className="md:hidden">Write</span>
+                      <PencilIcon />
+                    </button>
+                    <button
+                      type="button"
+                      className="flex items-center gap-2 px-4 py-2 border rounded-lg md:border-0 hover:bg-red-500/80 hover:text-white "
+                      onClick={() => {
+                        removeTopic(item);
+                      }}
+                    >
+                      <span className="md:hidden">Delete</span>
+                      <DeleteIcon />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Tab.Panels>
+        </Tab.Group>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+      {openAddTopicModal && (
+        <Modal
+          open={openAddTopicModal}
+          onClose={() => {
+            setOpenAddTopicModal(false);
+          }}
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+          <AddTopicForm
+            addNewTopic={addNewTopic}
+            closeModal={() => {
+              setOpenAddTopicModal(false);
+            }}
+          />
+        </Modal>
+      )}
+      {openEditorModal && (
+        <Modal
+          open={openEditorModal}
+          onClose={() => {
+            setOpenEditorModal(false);
+          }}
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+          {writeTopic && <Editor topic={writeTopic} />}
+        </Modal>
+      )}
     </main>
-  )
+  );
 }
