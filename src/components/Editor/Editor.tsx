@@ -132,14 +132,18 @@ const Editor: React.FC<{ topic: Topic }> = ({ topic }) => {
   return (
     <div className="space-y-4">
       {generatedText || generatedImage ? (
-        <div className="space-y-4">
-          <h6 className="text-lg font-medium">Generated Content</h6>
-          <p>{generatedText}</p>
+        <div className="max-w-sm mx-auto bg-white border border-gray-200 rounded-lg shadow">
           <img
+            className="rounded-t-lg"
             src={generatedImage}
-            alt="Generated Content"
-            className="object-contain w-32 mx-auto rounded-lg aspect-square"
+            alt="Generated Image"
           />
+          <div className="p-5">
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+              Generated Content
+            </h5>
+            <p className="mb-3 font-normal text-gray-700 ">{generatedText}</p>
+          </div>
         </div>
       ) : (
         <div className="space-y-4">
